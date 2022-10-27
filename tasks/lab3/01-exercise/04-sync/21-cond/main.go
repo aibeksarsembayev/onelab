@@ -3,29 +3,36 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 var sharedRsc = make(map[string]interface{})
 
 func main() {
 	var wg sync.WaitGroup
-
+	var mu sync.Mutex
+	c := sync.NewCond(&mu)
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 
 		//TODO: suspend goroutine until sharedRsc is populated.
-
+		c.L.Lock()
 		for len(sharedRsc) == 0 {
-			time.Sleep(1 * time.Millisecond)
+			// time.Sleep(1 * time.Millisecond)
+			c.Wait()
 		}
-
 		fmt.Println(sharedRsc["rsc1"])
+		c.L.Unlock()
 	}()
 
 	// writes changes to sharedRsc
-	sharedRsc["rsc1"] = "foo"
+	go func() {
+		// defer wg.Done()
+		c.L.Lock()
+		sharedRsc["rsc1"] = "foo"
+		c.Signal()
+		c.L.Unlock()
+	}()
 
 	wg.Wait()
 }
