@@ -13,6 +13,7 @@ func main() {
 	var balance int
 	var wg sync.WaitGroup
 	var mu sync.Mutex
+	var muRW sync.RWMutex
 
 	deposit := func(amount int) {
 		mu.Lock()
@@ -33,9 +34,9 @@ func main() {
 
 	wg.Wait()
 	for i := 0; i < 10; i++ {
-		mu.Lock()
+		muRW.Lock()
 		fmt.Println(balance)
-		mu.Unlock()
+		muRW.Unlock()
 	}
 	// fmt.Println(balance)
 }
