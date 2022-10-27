@@ -17,14 +17,8 @@ func main() {
 
 	// TODO: range over channel to recv values
 
-	for  {
-		value, ok := <- ch 
-		if ok {			
-			fmt.Println(value)
-		} else {
-			return
-		}		
+	for v := range ch {
+		fmt.Println(v)
 	}
-
 }
 
