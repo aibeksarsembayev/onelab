@@ -32,5 +32,10 @@ func main() {
 	// allow multiple reads, writes holds the lock exclusively.
 
 	wg.Wait()
-	fmt.Println(balance)
+	for i := 0; i < 10; i++ {
+		mu.Lock()
+		fmt.Println(balance)
+		mu.Unlock()
+	}
+	// fmt.Println(balance)
 }
