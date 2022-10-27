@@ -12,7 +12,7 @@ func main() {
 
 	var balance int
 	var wg sync.WaitGroup
-
+	var mu sync.Mutex
 	deposit := func(amount int) {
 		balance += amount
 	}
@@ -31,7 +31,9 @@ func main() {
 	for i := 0; i < 100; i++ {
 		go func() {
 			defer wg.Done()
+			mu.Lock()
 			deposit(1)
+			mu.Unlock()
 		}()
 	}
 
@@ -39,7 +41,9 @@ func main() {
 	for i := 0; i < 100; i++ {
 		go func() {
 			defer wg.Done()
+			mu.Lock()
 			withdrawal(1)
+			mu.Unlock()
 		}()
 	}
 
