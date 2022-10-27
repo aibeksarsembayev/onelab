@@ -8,6 +8,7 @@ func main() {
 	ch := make(chan int)
 
 	go func() {
+		defer close(ch)
 		for i := 0; i < 6; i++ {
 			// TODO: send iterator over channel
 			ch <- i
@@ -16,8 +17,14 @@ func main() {
 
 	// TODO: range over channel to recv values
 
-	for i := 0; i < 6; i++ {
-		fmt.Println(<-ch)
+	for  {
+		value, ok := <- ch 
+		if ok {			
+			fmt.Println(value)
+		} else {
+			return
+		}		
 	}
 
 }
+
