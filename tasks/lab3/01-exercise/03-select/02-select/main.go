@@ -14,11 +14,14 @@ func main() {
 	}()
 
 	// TODO: implement timeout for recv on channel ch
-	select {
-	case <-time.After(3 * time.Second):
-		return
-	case m := <-ch:
-		fmt.Println(m)
+	for {
+		select {
+		case <-time.After(3 * time.Second):
+			fmt.Println("Time has expired")
+			return
+		case m := <-ch:
+			fmt.Println(m)
+		}
 	}
 
 }
