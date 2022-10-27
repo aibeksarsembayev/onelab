@@ -14,7 +14,11 @@ func main() {
 	}()
 
 	// TODO: implement timeout for recv on channel ch
+	select {
+	case <-time.After(3 * time.Second):
+		return
+	case m := <-ch:
+		fmt.Println(m)
+	}
 
-	m := <-ch
-	fmt.Println(m)
 }
