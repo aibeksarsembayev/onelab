@@ -43,7 +43,7 @@ func main() {
 
 	// writes changes to sharedRsc
 	go func() {
-		defer wg.Done()
+		// defer wg.Done()
 		c.L.Lock()
 		sharedRsc["rsc1"] = "foo"
 		sharedRsc["rsc2"] = "bar"

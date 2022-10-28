@@ -16,6 +16,7 @@ func main() {
 	}()
 
 	// TODO: if there is no value on channel, do not block.
+
 	// for i := 0; i < 2; i++ {
 	// 	m := <-ch
 	// 	fmt.Println(m)
@@ -25,11 +26,11 @@ func main() {
 	// 	time.Sleep(1500 * time.Millisecond)
 	// }
 
-	for{
-		select{
-		case v:= <-ch:
+	for {
+		select {
+		case v := <-ch:
 			fmt.Println(v)
-		case <- time.After(1500*time.Millisecond):
+		case <-time.After(1500 * time.Millisecond):
 			fmt.Println("processing...")
 		}
 	}

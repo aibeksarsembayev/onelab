@@ -32,11 +32,11 @@ func main() {
 	//TODO: implement concurrent read.
 	// allow multiple reads, writes holds the lock exclusively.
 
-	wg.Wait()
 	for i := 0; i < 10; i++ {
 		muRW.Lock()
 		fmt.Println(balance)
 		muRW.Unlock()
 	}
+	wg.Wait()
 	// fmt.Println(balance)
 }

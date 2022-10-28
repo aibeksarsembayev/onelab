@@ -16,7 +16,6 @@ func main() {
 	mu := sync.Mutex{}
 	mu.Lock()
 	t = time.AfterFunc(randomDuration(), func() {
-
 		fmt.Println(time.Now().Sub(start))
 		mu.Lock()
 		t.Reset(randomDuration())
