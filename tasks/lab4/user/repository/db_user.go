@@ -20,7 +20,7 @@ func (db *dbUserRepository) Create(ctx context.Context, user *domain.User) error
 }
 
 func (db *dbUserRepository) GetByID(ctx context.Context, id int) (domain.User, error) {
-	return nil, nil
+	return domain.User{}, nil
 }
 
 func (db *dbUserRepository) GetAll(ctx context.Context) ([]domain.User, error) {

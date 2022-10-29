@@ -1,6 +1,8 @@
 package httpdelivery
 
 import (
+	"net/http"
+
 	"github.com/aibeksarsembayev/onelab/tasks/lab4/domain"
 	"github.com/labstack/echo/v4"
 )
@@ -15,9 +17,12 @@ func NewUserHandler(e *echo.Echo, us domain.UserUsecase) {
 	handler := &UserHandler{
 		UserUsecase: us,
 	}
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World! It is simple CRUD template on Echo with Docker and GitLab CI/CD")
+	})
 	user := e.Group("/user")
 	user.POST("/", handler.Create)
-	user.GET("/", handler.GetByID)
+	user.GET("/:id", handler.GetByID)
 	user.GET("/all", handler.GetAll)
 	user.PUT("/:id", handler.Update)
 	user.DELETE("/:id", handler.Delete)

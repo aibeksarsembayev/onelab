@@ -7,9 +7,9 @@ package main
 import (
 	"time"
 
-	_userHttpDelivery "github.com/aibeksarsembayev/onelab/tasks/lab4/handlers/http"
-	_userRepo "github.com/aibeksarsembayev/onelab/tasks/lab4/repository"
-	_userUsecase "github.com/aibeksarsembayev/onelab/tasks/lab4/usecase"
+	_userHttpDelivery "github.com/aibeksarsembayev/onelab/tasks/lab4/user/handlers/http"
+	_userRepo "github.com/aibeksarsembayev/onelab/tasks/lab4/user/repository"
+	_userUsecase "github.com/aibeksarsembayev/onelab/tasks/lab4/user/usecases"
 	"github.com/labstack/echo/v4"
 )
 

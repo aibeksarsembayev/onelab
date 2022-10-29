@@ -30,7 +30,7 @@ func (u *userUsecase) Create(ctx context.Context, user *domain.User) error {
 func (u *userUsecase) GetByID(ctx context.Context, id int) (domain.User, error) {
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeout)
 	defer cancel()
-	return nil, nil
+	return domain.User{}, nil
 }
 
 func (u *userUsecase) GetAll(ctx context.Context) ([]domain.User, error) {
