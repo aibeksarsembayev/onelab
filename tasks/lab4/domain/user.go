@@ -6,12 +6,18 @@ import (
 )
 
 type User struct {
-	ID        int       `json:"id`
+	ID        int       `json:"id"`
 	Name      string    `json:"name"`
-	Surname   string    `json:"name"`
+	Surname   string    `json:"surname"`
 	Email     string    `json:"email"`
 	Status    bool      `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
+}
+
+type UserRequestDTO struct {
+	Name    string `json:"name" form:"name"`
+	Surname string `json:"surname" form:"surname"`
+	Email   string `json:"email" form:"email"`
 }
 
 // UserUsecases ...

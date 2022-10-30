@@ -11,16 +11,18 @@ import (
 	_userRepo "github.com/aibeksarsembayev/onelab/tasks/lab4/user/repository"
 	_userUsecase "github.com/aibeksarsembayev/onelab/tasks/lab4/user/usecases"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 
 	e := echo.New()
+	// Root level middleware
+	e.Use(middleware.Logger())
 
 	userRepo := _userRepo.NewDBUserRepository() // pass db conn
 
 	timeoutContext := time.Duration(5 * time.Second)
-
 	uUsecase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
 	_userHttpDelivery.NewUserHandler(e, uUsecase)
 
