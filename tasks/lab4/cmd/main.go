@@ -5,8 +5,10 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
+	config "github.com/aibeksarsembayev/onelab/tasks/lab4/config"
 	_userHttpDelivery "github.com/aibeksarsembayev/onelab/tasks/lab4/user/handlers/http"
 	_userRepo "github.com/aibeksarsembayev/onelab/tasks/lab4/user/repository"
 	_userUsecase "github.com/aibeksarsembayev/onelab/tasks/lab4/user/usecases"
@@ -15,17 +17,34 @@ import (
 )
 
 func main() {
+	// load configs
+	conf, err := config.LoadConfig()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(conf)
+	}
 
+	// create pool of connection for DB
+
+	// initialize echo server
 	e := echo.New()
+
 	// Root level middleware
 	e.Use(middleware.Logger())
 
-	userRepo := _userRepo.NewDBUserRepository() // pass db conn
+	// initialize repos
+	userRepo := _userRepo.NewDBUserRepository() // pass DB conn
 
-	timeoutContext := time.Duration(5 * time.Second)
+	// set context timeout
+	timeoutContext := time.Duration(conf.Context.Timeout) * time.Second
+
+	// initialize usecases
 	uUsecase := _userUsecase.NewUserUsecase(userRepo, timeoutContext)
+
+	// initialzie handlers
 	_userHttpDelivery.NewUserHandler(e, uUsecase)
 
-	e.Logger.Fatal(e.Start(":8080"))
-
+	// start echo server
+	e.Logger.Fatal(e.Start(conf.Server.Address))
 }

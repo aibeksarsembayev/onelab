@@ -20,6 +20,7 @@ func NewUserHandler(e *echo.Echo, us domain.UserUsecase) {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World! It is simple CRUD template on Echo with Docker and GitLab CI/CD")
 	})
+	// user routes
 	user := e.Group("/user")
 	user.POST("/create", handler.Create)
 	user.GET("/:id", handler.GetByID)
