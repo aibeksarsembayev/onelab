@@ -5,3 +5,5 @@
 ## ```make run``` - to run project container in docker
 
 ## ```make stop``` - to stop container
+
+## ```make postmanCLI``` - to run postman collection

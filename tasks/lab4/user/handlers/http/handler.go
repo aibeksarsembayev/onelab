@@ -26,5 +26,5 @@ func NewUserHandler(e *echo.Echo, us domain.UserUsecase) {
 	user.GET("/:id", handler.GetByID)
 	user.GET("/all", handler.GetAll)
 	user.PUT("/:id", handler.Update)
-	user.DELETE("/:id", handler.Delete)
+	user.DELETE("/delete", handler.Delete)
 }

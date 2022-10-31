@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// User struct ...
 type User struct {
 	ID        int       `json:"id"`
 	Name      string    `json:"name"`
@@ -14,10 +15,11 @@ type User struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+// UserRequestDTO ...
 type UserRequestDTO struct {
-	Name    string `json:"name" form:"name"`
-	Surname string `json:"surname" form:"surname"`
-	Email   string `json:"email" form:"email"`
+	Name    string `json:"name" form:"name" query:"name"`
+	Surname string `json:"surname" form:"surname" query:"surname"`
+	Email   string `json:"email" form:"email" query:"email"`
 }
 
 // UserUsecases ...
